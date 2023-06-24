@@ -1,0 +1,12 @@
+# Configurações básicas do Squid
+http_port 3128
+visible_hostname proxy.example.com
+
+# Configurações de acesso
+acl localnet src 192.168.56.0/24
+http_access allow localnet
+http_access deny all
+
+# Configurações de cache
+cache_dir ufs /var/spool/squid 100 16 256
+maximum_object_size 4096 KB

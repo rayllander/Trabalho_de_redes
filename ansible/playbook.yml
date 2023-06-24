@@ -1,0 +1,24 @@
+- name: Configurar servidor DNS
+  hosts: server_dns
+  become: true
+  roles:
+    - role: server_dns
+
+- name: Configurar servidor web_server
+  hosts: web_server
+  become: true
+  roles:
+    - role: install_docker
+    - role: web_server
+
+- name: Configurar servidor NFS
+  hosts: server_nfs
+  become: true
+  roles:
+    - role: server_nfs
+
+- name: Configurar servidor Proxy Squid
+  hosts: server_proxy_squid
+  become: true
+  roles:
+    - role: server_proxy_squid

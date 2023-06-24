@@ -1,0 +1,20 @@
+---
+# tasks file for server_proxy_squid
+- name: Instalar o Squid
+  ansible.builtin.apt:
+    update_cache: true
+    name: squid
+    state: present
+
+- name: Configurar o arquivo de configuração do Squid
+  ansible.builtin.template:
+    src: squid.conf.j2
+    dest: /etc/squid/squid.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restartando o Squid
+  ansible.builtin.service:
+    name: squid
+    state: restarted

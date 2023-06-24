@@ -1,0 +1,13 @@
+---
+# tasks file for web_server
+- name: Copiar docker-compose.yml para o servidor
+  ansible.builtin.template:
+    src: roles/web_server/templates/docker-compose.yml.j2
+    dest: /opt/docker-compose.yml
+    mode: '0644'
+
+- name: Executar o Web Server
+  ansible.builtin.command: docker-compose up -d
+  args:
+    chdir: /opt/
+  changed_when: false

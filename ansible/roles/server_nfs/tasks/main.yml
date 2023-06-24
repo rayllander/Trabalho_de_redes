@@ -1,0 +1,29 @@
+---
+# tasks file for server_nfs
+- name: Instalar pacotes necessários
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - nfs-kernel-server
+      - nfs-common
+    state: present
+
+- name: Configurar diretório NFS
+  ansible.builtin.file:
+    path: /srv/nfs
+    state: directory
+    mode: "0755"
+
+- name: Configurar exportação NFS
+  ansible.builtin.lineinfile:
+    path: /etc/exports
+    line: "/srv/nfs *(rw,sync,no_subtree_check,no_root_squash)"
+    state: present
+    create: true
+    insertafter: EOF
+    mode: "0755"
+
+- name: Reiniciar servidor NFS
+  ansible.builtin.systemd:
+    name: nfs-kernel-server
+    state: restarted

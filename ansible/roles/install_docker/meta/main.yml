@@ -1,0 +1,10 @@
+galaxy_info:
+  author: teste
+  description: Instala o docker em um ubuntu
+  company: teste
+  license: GPL-2.0-or-later
+  min_ansible_version: "2.1"
+  platforms:
+    - name: AIX
+
+dependencies: []
